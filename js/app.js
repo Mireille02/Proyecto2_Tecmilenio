@@ -1,11 +1,11 @@
 //Avance 3
 const ingresos = [
-    new Ingreso('Salario', 20000), 
+    new Ingreso('Salario', 20000),
     new Ingreso('Venta coche', 50000)
 ];
 
 const egresos = [
-    new Egreso('Renta', 4000), 
+    new Egreso('Renta', 4000),
     new Egreso('Ropa', 800)
 ];
 
@@ -13,8 +13,8 @@ const egresos = [
 //Avance 2
 const cargarApp = () => {
     cargarCabecero();
-    //cargarIngresos();
-    //cargarEgresos();
+    cargarIngresos();
+    cargarEgresos();
 }
 
 //Avance 2 y 4
@@ -121,10 +121,11 @@ const crearEgresoHTML = (egreso) => {
     <div class="elemento_descripcion">${egreso.descripcion}</div>
     <div class="derecha limpiarEstilos">
         <div class="elemento_valor">-${formatoMoneda(egreso.valor)}</div>
+        <div class="elemento_porcentaje">${formatoPorcentaje(egreso.valor/totalEgresos())}</div>
         <div class="elemento_eliminar">
             <button class="elemento_eliminar--btn">
                 <ion-icon name="close-circle-outline"
-                onclick='eliminarIngreso(${egreso.id})'>>/ion-icon>
+                onclick='eliminarEgreso(${egreso.id})'>>/ion-icon>
             </button>
         </div>
     </div>
@@ -139,19 +140,19 @@ let eliminarEgreso = (id) => {
     cargarEgresos();
 }
 
-let agregarDato = ()=>{
+let agregarDato = () => {
     let forma = document.forms['forma'];
     let tipo = forma['tipo'];
     let descripcion = forma['descripcion'];
     let valor = forma['valor'];
-    if(descripcion.value !== '' && valor.value !== ''){
-        if(tipo.value === 'ingreso'){
-            ingresos.push( new ingreso(descripcion.value, +valor.value));
+    if (descripcion.value !== '' && valor.value !== '') {
+        if (tipo.value === 'ingreso') {
+            ingresos.push(new Ingreso(descripcion.value, +valor.value));
             cargarCabecero();
             cargarIngresos();
         }
-        else if(tipo.value === 'egreso'){
-            egresos.push( new Egreso(descripcion.value, +valor.value));
+        else if (tipo.value === 'egreso') {
+            egresos.push(new Egreso(descripcion.value, +valor.value));
             cargarCabecero();
             cargarEgresos();
         }
